@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    urban_dictionary (0.0.1)
+      nokogiri (~> 1.5.2)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    nokogiri (1.5.2)
+    rake (0.9.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0.22)
+  rake
+  urban_dictionary!
