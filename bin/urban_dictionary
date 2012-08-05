@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby -KU
+require 'urban_dictionary'
+require 'optparse'
+
+def error_and_exit(msg)
+  puts msg
+  exit(1)
+end
+
+options = {}
+option_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: urban_dictionary <word or phrase>"
+  opts.version = UrbanDictionary::VERSION
+
+  opts.on("-r", "--random", "Define a random word") do |r|
+    options[:random] = r
+  end
+end
+option_parser.parse(ARGV)
+
+error_and_exit("No word provided") if ARGV.empty? && !options[:random]
+
+word = if options[:random]
+  UrbanDictionary.random_word
+else
+  UrbanDictionary.define(ARGV.join(" "))
+end
+
+output = []
+output << word
+output << '-' * word.size
+output << ''
+word.entries.each_with_index do |entry, i|
+  output << "#{i + 1}. #{entry.definition}"
+  output << ""
+  output << "Example: #{entry.example}"
+  output << ""
+  output << ""
+end
+puts output.join("\n")
