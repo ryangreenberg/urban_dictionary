@@ -2,11 +2,6 @@
 require 'urban_dictionary'
 require 'optparse'
 
-def error_and_exit(msg)
-  puts msg
-  exit(1)
-end
-
 options = {}
 option_parser = OptionParser.new do |opts|
   opts.banner = "Usage: urban_dictionary <word or phrase>"
@@ -18,7 +13,10 @@ option_parser = OptionParser.new do |opts|
 end
 option_parser.parse(ARGV)
 
-error_and_exit("No word provided") if ARGV.empty? && !options[:random]
+if ARGV.empty? && !options[:random]
+  puts option_parser.help
+  exit(0)
+end
 
 word = if options[:random]
   UrbanDictionary.random_word
