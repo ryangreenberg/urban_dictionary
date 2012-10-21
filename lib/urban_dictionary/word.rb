@@ -10,12 +10,14 @@ module UrbanDictionary
       html = open(url).read
       doc = Nokogiri::HTML(html)
 
-      word = doc.css('.word').first.content.strip
-      definitions = doc.css('.definition').map{|d| d.content.strip }
-      examples = doc.css('.example').map{|e| e.content.strip }
-      entries = definitions.zip(examples).map{|d,e| Entry.new(d, e)}
+      if doc.css('.word').any?
+        word = doc.css('.word').first.content.strip
+        definitions = doc.css('.definition').map{|d| d.content.strip }
+        examples = doc.css('.example').map{|e| e.content.strip }
+        entries = definitions.zip(examples).map{|d,e| Entry.new(d, e)}
 
-      Word.new(word, entries)
+        Word.new(word, entries)
+      end
     end
 
     def initialize(word, entries)

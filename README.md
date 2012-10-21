@@ -8,7 +8,7 @@ Run `gem install urban_dictionary`.
 
 ## Usage ##
 
-Get words using `UrbanDictionary.define` or `UrbanDictionary.random_word`. These methods return an instance of UrbanDictionary::Word, which has a list of entries. Each entry has a definition and an example.
+Get words using `UrbanDictionary.define` or `UrbanDictionary.random_word`. These methods return an instance of UrbanDictionary::Word, which has a list of entries, or nil if the word is not found. Each entry has a definition and an example.
 
     require 'urban_dictionary'
 
@@ -34,3 +34,10 @@ The urban_dictionary gem includes a command-line interface:
 You can use the `--random` flag to get the definition of random word:
 
     > urban_dictionary --random
+
+## Tests ##
+
+Run examples with:
+
+    rspec
+
