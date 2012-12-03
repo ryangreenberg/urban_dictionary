@@ -23,7 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.0.22)
   rake
   rspec
   urban_dictionary!
