@@ -20,6 +20,6 @@ module UrbanDictionary
       http.request(req)
     }
 
-    define(rsp['location'])
+    Word.from_url(rsp['location'])
   end
 end
