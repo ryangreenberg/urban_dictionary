@@ -24,6 +24,11 @@ else
   UrbanDictionary.define(ARGV.join(" "))
 end
 
+if word.nil?
+  puts "Not found: '#{ARGV}'"
+  exit 1
+end
+
 output = []
 output << word
 output << '-' * word.size
