@@ -35,3 +35,4 @@ module UrbanDictionary
     alias :length :size
   end
 end
+
