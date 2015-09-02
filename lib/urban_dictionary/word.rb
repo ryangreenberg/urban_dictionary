@@ -12,7 +12,7 @@ module UrbanDictionary
 
       if doc.css('.word').any?
         word = doc.css('.word').first.content.strip
-        definitions = doc.css('.definition').map{|d| d.content.strip }
+        definitions = doc.css('div.meaning').map{|d| d.content.strip }
         examples = doc.css('.example').map{|e| e.content.strip }
         entries = definitions.zip(examples).map{|d,e| Entry.new(d, e)}
 
@@ -35,3 +35,4 @@ module UrbanDictionary
     alias :length :size
   end
 end
+
