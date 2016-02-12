@@ -24,10 +24,7 @@ else
   UrbanDictionary.define(ARGV.join(" "))
 end
 
-if word.nil?
-  puts "Not found: '#{ARGV}'"
-  exit 1
-end
+abort "No definition found for: '#{ARGV}'" if word.nil?
 
 output = []
 output << word
