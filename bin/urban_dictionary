@@ -18,13 +18,14 @@ if ARGV.empty? && !options[:random]
   exit(0)
 end
 
+term = ARGV.join(" ")
 word = if options[:random]
   UrbanDictionary.random_word
 else
-  UrbanDictionary.define(ARGV.join(" "))
+  UrbanDictionary.define(term)
 end
 
-abort "No definition found for: '#{ARGV}'" if word.nil?
+abort "No definition found for '#{term}'" if word.nil?
 
 output = []
 output << word
