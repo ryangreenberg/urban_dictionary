@@ -1,9 +1,9 @@
 require 'uri'
 require 'net/http'
 
-require 'urban_dictionary/version'
-require 'urban_dictionary/word'
-require 'urban_dictionary/entry'
+require_relative 'urban_dictionary/version'
+require_relative 'urban_dictionary/word'
+require_relative 'urban_dictionary/entry'
 
 module UrbanDictionary
   DEFINE_URL = 'http://www.urbandictionary.com/define.php'

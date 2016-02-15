@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby -KU
-require 'urban_dictionary'
+require_relative '../lib/urban_dictionary'
 require 'optparse'
 
 options = {}
