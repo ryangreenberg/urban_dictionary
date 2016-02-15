@@ -7,9 +7,9 @@ module UrbanDictionary
   class Word
     attr_reader :word, :entries
 
-    # Can raise SocketError if unable to connect to specified URL
+      # Can raise SocketError if unable to connect to specified URL
     def self.from_url(url)
-      html = open(url).read
+      html = open(url) {|f| f.read }
       from_html(html)
     end
 
