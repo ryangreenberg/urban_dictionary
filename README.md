@@ -2,6 +2,8 @@
 
 `urban_dictionary` is a Ruby gem to access word definitions and examples from [Urban Dictionary](http://www.urbandictionary.com/). It also provides a command-line tool for getting definitions.
 
+[![Build Status](https://travis-ci.org/ryangreenberg/urban_dictionary.svg?branch=master)](https://travis-ci.org/ryangreenberg/urban_dictionary)
+
 ## Installation ##
 
 Run `gem install urban_dictionary`.
