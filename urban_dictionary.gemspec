@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = UrbanDictionary::VERSION
   s.authors     = ["Ryan Greenberg"]
   s.email       = ["ryangreenberg@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/ryangreenberg/urban_dictionary"
   s.summary     = "Interface to urbandictionary.com"
   s.description = s.summary
 
