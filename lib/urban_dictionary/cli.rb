@@ -4,8 +4,10 @@ module UrbanDictionary
   class CLI
     attr_reader :options
 
-    def initialize(args)
+    def initialize(args, stdout=STDOUT, stderr=STDERR)
       @args = args
+      @stdout = stdout
+      @stderr = stderr
       @options = {}
     end
 
@@ -24,7 +26,7 @@ module UrbanDictionary
       options[:remaining] = option_parser.parse(@args)
 
       if options[:remaining].empty? && !options[:random]
-        puts option_parser.help
+        @stdout.puts option_parser.help
         exit(0)
       end
 
@@ -35,7 +37,10 @@ module UrbanDictionary
         UrbanDictionary.define(term)
       end
 
-      abort "No definition found for '#{term}'" if word.nil?
+      if word.nil?
+        @stderr.puts "No definition found for '#{term}'"
+        exit(1)
+      end
 
       output = []
       output << word
@@ -48,7 +53,8 @@ module UrbanDictionary
         output << ""
         output << ""
       end
-      puts output.join("\n")
+
+      @stdout.puts output.join("\n")
     end
   end
 end
