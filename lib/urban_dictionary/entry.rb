@@ -10,5 +10,9 @@ module UrbanDictionary
     def to_s
       "#{definition}\n#{example}"
     end
+
+    def inspect
+      "<#{self.class} @definition=#{definition.inspect}, @example=#{example.inspect}>"
+    end
   end
 end

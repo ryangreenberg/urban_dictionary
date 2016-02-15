@@ -47,6 +47,10 @@ module UrbanDictionary
       @word
     end
 
+    def inspect
+      "<#{self.class} @word=#{word.inspect}, @entries=#{entries.inspect}>"
+    end
+
     def size
       @word.size
     end
