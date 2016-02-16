@@ -1,5 +1,6 @@
 require File.expand_path('../../lib/urban_dictionary', __FILE__)
 require 'shellwords'
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
