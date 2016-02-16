@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby -KU
 require_relative '../lib/urban_dictionary'
 
-UrbanDictionary::CLI.new(ARGV).run
+config = UrbanDictionary::CLI::Config.new(:args => ARGV)
+UrbanDictionary::CLI.new(config).run
