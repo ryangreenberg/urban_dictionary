@@ -1,5 +1,4 @@
 require "spec_helper"
-require "stringio"
 
 describe UrbanDictionary::CLI do
   CLI = UrbanDictionary::CLI
@@ -34,7 +33,7 @@ describe UrbanDictionary::CLI do
   describe "#run" do
     it "outputs help when called with no arguments" do
       cli, config = mk_cli("")
-      suppress_exit(0) { cli.run }
+      cli.run
       expect(config.stdout).to include("Usage: urban_dictionary")
     end
 
@@ -59,6 +58,15 @@ describe UrbanDictionary::CLI do
       cli, config = mk_cli("--random", dictionary)
       cli.run
       expect(config.stdout).to include(random_word.word)
+    end
+
+    it "accepts --format to specify output format" do
+      word = mk_word("a word", "a definition", "a example")
+      dictionary = double("dictionary", :define => word)
+      cli, config = mk_cli("--format=json a word", dictionary)
+      cli.run
+      obj = MultiJson.load(config.stdout.content)
+      expect(obj).to include("word" => word.word)
     end
   end
 end

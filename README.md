@@ -37,9 +37,21 @@ You can use the `--random` flag to get the definition of random word:
 
     > urban_dictionary --random
 
+Specify the output format with `--format`. The default is `plain`; `json` is also supported.
+
+    > urban_dictionary --format=json one hundred | jq .
+    {
+      "word": "one hundred",
+      "entries": [
+        {
+          "definition": "keepin it real to the fullest and super tight.",
+          "example": "end of the convo\rLuke: aight man, peace\rQ: kool homie, keep it one hundred (100)"
+        },
+        ...
+    }
+
 ## Tests ##
 
 Run examples with:
 
     rspec
-

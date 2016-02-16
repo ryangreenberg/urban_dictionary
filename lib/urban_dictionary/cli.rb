@@ -47,6 +47,8 @@ module UrbanDictionary
       end
     end
 
+    DEFAULT_FORMAT = :plain
+
     attr_reader :options
 
     def initialize(config)
@@ -65,6 +67,15 @@ module UrbanDictionary
         opts.on("-r", "--random", "Define a random word") do |r|
           options[:random] = r
         end
+
+        options[:format] = DEFAULT_FORMAT
+        opts.on("-f", "--format=FORMAT", "Output format (plain, json)") do |f|
+          format = f.downcase.to_sym
+          unless UrbanDictionary::Formatter.registered.include?(format)
+            raise OptionParser::InvalidOption, "#{f} is not a valid format"
+          end
+          options[:format] = format
+        end
       end
     end
 
@@ -73,7 +84,7 @@ module UrbanDictionary
 
       if options[:remaining].empty? && !options[:random]
         @stdout.puts option_parser.help
-        exit(0)
+        return
       end
 
       term = options[:remaining].join(" ")
@@ -88,19 +99,8 @@ module UrbanDictionary
         exit(1)
       end
 
-      output = []
-      output << word
-      output << '-' * word.size
-      output << ''
-      word.entries.each_with_index do |entry, i|
-        output << "#{i + 1}. #{entry.definition}"
-        output << ""
-        output << "Example: #{entry.example}"
-        output << ""
-        output << ""
-      end
-
-      @stdout.puts output.join("\n")
+      formatter = UrbanDictionary::Formatter.for(options[:format])
+      @stdout.puts(formatter.format(word))
     end
   end
 end
