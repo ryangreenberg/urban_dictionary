@@ -1,5 +1,8 @@
 require File.expand_path('../../lib/urban_dictionary', __FILE__)
+
+require 'multi_json'
 require 'shellwords'
+require 'stringio'
 require 'webmock/rspec'
 
 RSpec.configure do |config|
@@ -14,9 +17,13 @@ module Test
   end
 
   class IO < StringIO
-    def include?(str)
+    def content
       rewind
-      read.include?(str)
+      read
+    end
+
+    def include?(str)
+      content.include?(str)
     end
   end
 end

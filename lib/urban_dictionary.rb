@@ -3,8 +3,9 @@ require 'net/http'
 
 require_relative 'urban_dictionary/version'
 require_relative 'urban_dictionary/cli'
-require_relative 'urban_dictionary/word'
 require_relative 'urban_dictionary/entry'
+require_relative 'urban_dictionary/formatters'
+require_relative 'urban_dictionary/word'
 
 module UrbanDictionary
   DEFINE_URL = 'http://www.urbandictionary.com/define.php'
@@ -24,3 +25,6 @@ module UrbanDictionary
     Word.from_url(rsp['location'])
   end
 end
+
+UrbanDictionary::Formatter.register(:json, UrbanDictionary::JsonFormatter)
+UrbanDictionary::Formatter.register(:plain, UrbanDictionary::PlainFormatter)
