@@ -2,6 +2,7 @@ require 'uri'
 require 'net/http'
 
 require_relative 'urban_dictionary/version'
+require_relative 'urban_dictionary/cli'
 require_relative 'urban_dictionary/word'
 require_relative 'urban_dictionary/entry'
 

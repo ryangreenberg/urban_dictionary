@@ -1,41 +1,5 @@
 #!/usr/bin/env ruby -KU
 require_relative '../lib/urban_dictionary'
-require 'optparse'
 
-options = {}
-option_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: urban_dictionary <word or phrase>"
-  opts.version = UrbanDictionary::VERSION
-
-  opts.on("-r", "--random", "Define a random word") do |r|
-    options[:random] = r
-  end
-end
-option_parser.parse(ARGV)
-
-if ARGV.empty? && !options[:random]
-  puts option_parser.help
-  exit(0)
-end
-
-term = ARGV.join(" ")
-word = if options[:random]
-  UrbanDictionary.random_word
-else
-  UrbanDictionary.define(term)
-end
-
-abort "No definition found for '#{term}'" if word.nil?
-
-output = []
-output << word
-output << '-' * word.size
-output << ''
-word.entries.each_with_index do |entry, i|
-  output << "#{i + 1}. #{entry.definition}"
-  output << ""
-  output << "Example: #{entry.example}"
-  output << ""
-  output << ""
-end
-puts output.join("\n")
+config = UrbanDictionary::CLI::Config.new(:args => ARGV)
+UrbanDictionary::CLI.new(config).run
