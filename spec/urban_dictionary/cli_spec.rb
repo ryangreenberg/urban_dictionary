@@ -37,6 +37,12 @@ describe UrbanDictionary::CLI do
       expect(config.stdout).to include("Usage: urban_dictionary")
     end
 
+    it "outputs an error message when an invalid option is provided" do
+      cli, config = mk_cli("--invalid-option")
+      suppress_exit(1) { cli.run }
+      expect(config.stderr.content).to include("invalid option: --invalid-option")
+    end
+
     it "outputs error when word has no definition" do
       dictionary = double("dictionary", :define => nil)
       cli, config = mk_cli("undefined word", dictionary)

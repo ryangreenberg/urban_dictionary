@@ -79,8 +79,17 @@ module UrbanDictionary
       end
     end
 
+    def parse
+      begin
+        options[:remaining] = option_parser.parse(@args)
+      rescue OptionParser::InvalidOption, OptionParser::InvalidArgument => e
+        @stderr.puts e.message
+        exit(1)
+      end
+    end
+
     def run
-      options[:remaining] = option_parser.parse(@args)
+      parse
 
       if options[:remaining].empty? && !options[:random]
         @stdout.puts option_parser.help
