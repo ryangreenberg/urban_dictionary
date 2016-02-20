@@ -1,5 +1,8 @@
 # Changelog
 
+## [unreleased]
+- Added support for `-n <number>` or `--definitions=<number>` to limit output
+
 ## 1.0.0 - 2016-02-15
 - Fixed broken parsing of Urban Dictionary's new layout
 - Fixed bug where undefined words are displayed as the shrug emoticon (`¯\_(ツ)_/¯`)

@@ -74,5 +74,15 @@ describe UrbanDictionary::CLI do
       obj = MultiJson.load(config.stdout.content)
       expect(obj).to include("word" => word.word)
     end
+
+    it "accepts -n to limit number of definitions" do
+      word = mk_word("complex word", ["def #1", "def #2", "def #3"], ["example #1", "example #2", "example #3"])
+      dictionary = double("dictionary", :define => word)
+      cli, config = mk_cli("-n 1 #{word.word}", dictionary)
+      cli.run
+      expect(config.stdout.content).to include("def #1")
+      expect(config.stdout.content).not_to include("def #2")
+      expect(config.stdout.content).not_to include("def #3")
+    end
   end
 end

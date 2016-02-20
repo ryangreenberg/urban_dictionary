@@ -68,6 +68,14 @@ module UrbanDictionary
           options[:random] = r
         end
 
+        opts.on("-n", "--definitions=NUMBER", "Limit output to the first n definitions") do |n|
+          options[:limit] = begin
+            Integer(n)
+          rescue ArgumentError
+            raise OptionParser::InvalidArgument, "#{n} is not a valid number of definitions"
+          end
+        end
+
         options[:format] = DEFAULT_FORMAT
         opts.on("-f", "--format=FORMAT", "Output format (plain, json)") do |f|
           format = f.downcase.to_sym
@@ -106,6 +114,10 @@ module UrbanDictionary
       if word.nil?
         @stderr.puts "No definition found for '#{term}'"
         exit(1)
+      end
+
+      if options[:limit]
+        word = UrbanDictionary::Word.new(word.word, word.entries.first(options[:limit]))
       end
 
       formatter = UrbanDictionary::Formatter.for(options[:format])
