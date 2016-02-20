@@ -34,7 +34,7 @@ describe UrbanDictionary::CLI do
     it "outputs help when called with no arguments" do
       cli, config = mk_cli("")
       cli.run
-      expect(config.stdout).to include("Usage: urban_dictionary")
+      expect(config.stdout.content).to include("Usage: urban_dictionary")
     end
 
     it "outputs an error message when an invalid option is provided" do
@@ -47,7 +47,7 @@ describe UrbanDictionary::CLI do
       dictionary = double("dictionary", :define => nil)
       cli, config = mk_cli("undefined word", dictionary)
       suppress_exit(1) { cli.run }
-      expect(config.stderr).to include("No definition found for 'undefined word'")
+      expect(config.stderr.content).to include("No definition found for 'undefined word'")
     end
 
     it "outputs a word's definition when found" do
@@ -55,7 +55,7 @@ describe UrbanDictionary::CLI do
       dictionary = double("dictionary", :define => word)
       cli, config = mk_cli(word.word, dictionary)
       cli.run
-      expect(config.stdout).to include(word.word)
+      expect(config.stdout.content).to include(word.word)
     end
 
     it "outputs a random word when --random is provided" do
@@ -63,7 +63,7 @@ describe UrbanDictionary::CLI do
       dictionary = double("dictionary", :random_word => random_word)
       cli, config = mk_cli("--random", dictionary)
       cli.run
-      expect(config.stdout).to include(random_word.word)
+      expect(config.stdout.content).to include(random_word.word)
     end
 
     it "accepts --format to specify output format" do

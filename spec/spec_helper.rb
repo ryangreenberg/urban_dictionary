@@ -21,10 +21,6 @@ module Test
       rewind
       read
     end
-
-    def include?(str)
-      content.include?(str)
-    end
   end
 end
 
