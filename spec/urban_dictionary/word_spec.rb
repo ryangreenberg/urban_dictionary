@@ -24,8 +24,8 @@ describe UrbanDictionary::Word do
   describe "class method" do
     describe "#from_url" do
       let(:url){ "the_url" }
-      let(:html_with_results){ Test.load_fixture("on_fleek_2016-02-15.html") }
-      let(:html_without_results){ Test.load_fixture("sisyphus_2016-02-15.html") }
+      let(:html_with_results){ load_fixture("on_fleek_2016-02-15.html") }
+      let(:html_without_results){ load_fixture("sisyphus_2016-02-15.html") }
 
       it "parses a valid word" do
         word = UrbanDictionary::Word.from_html(html_with_results)
