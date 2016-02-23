@@ -16,6 +16,13 @@ module TestHelpers
   def load_fixture(name)
     File.read(File.expand_path("../html/#{name}", __FILE__))
   end
+
+  def mk_word(term, definitions, examples)
+    UrbanDictionary::Word.new(
+      term,
+      Array(definitions).zip(Array(examples)).map {|ea| UrbanDictionary::Entry.new(*ea) }
+    )
+  end
 end
 
 class String

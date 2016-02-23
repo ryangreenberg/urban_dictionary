@@ -23,13 +23,6 @@ describe UrbanDictionary::CLI do
     [cli, config]
   end
 
-  def mk_word(term, definitions, examples)
-    UrbanDictionary::Word.new(
-      term,
-      Array(definitions).zip(Array(examples)).map {|ea| UrbanDictionary::Entry.new(*ea) }
-    )
-  end
-
   describe "#run" do
     it "outputs help when called with no arguments" do
       cli, config = mk_cli("")
