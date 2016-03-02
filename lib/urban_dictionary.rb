@@ -26,5 +26,6 @@ module UrbanDictionary
   end
 end
 
+UrbanDictionary::Formatter.register(:definition, UrbanDictionary::DefinitionFormatter)
 UrbanDictionary::Formatter.register(:json, UrbanDictionary::JsonFormatter)
 UrbanDictionary::Formatter.register(:plain, UrbanDictionary::PlainFormatter)

@@ -3,6 +3,7 @@
 ## [unreleased]
 - Added support for `-n <number>` or `--definitions=<number>` to limit output
 - Fixed output mangled by carriage returns (`\r`)
+- Added `--format=definition` that only outputs the definitions for a word
 
 ## 1.0.0 - 2016-02-15
 - Fixed broken parsing of Urban Dictionary's new layout
