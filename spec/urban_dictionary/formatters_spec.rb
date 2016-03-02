@@ -13,6 +13,29 @@ describe UrbanDictionary::PlainFormatter do
   end
 end
 
+describe UrbanDictionary::DefinitionFormatter do
+  let(:formatter) { UrbanDictionary::DefinitionFormatter }
+  let(:word) { mk_word("term", "definition", "example") }
+
+  describe "#format" do
+    it "includes the definition" do
+      output = formatter.format(word)
+      expect(output).to include(word.entries.first.definition)
+    end
+
+    it "does not include the word" do
+      output = formatter.format(word)
+      expect(output).not_to include(word.word)
+    end
+
+    it "does not include examples" do
+      output = formatter.format(word)
+      expect(output).not_to include(word.entries.first.example)
+    end
+  end
+end
+
+
 describe UrbanDictionary::JsonFormatter do
   let(:formatter) { UrbanDictionary::JsonFormatter }
 

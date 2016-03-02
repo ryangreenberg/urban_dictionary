@@ -50,6 +50,12 @@ module UrbanDictionary
     end
   end
 
+  class DefinitionFormatter < Formatter
+    def self.format(word)
+      word.entries.map {|ea| Util.convert_linebreaks(ea.definition) }.join("\n")
+    end
+  end
+
   class JsonFormatter < Formatter
     def self.format(word)
       hsh = {

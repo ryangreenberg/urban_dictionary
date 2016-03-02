@@ -77,7 +77,7 @@ module UrbanDictionary
         end
 
         options[:format] = DEFAULT_FORMAT
-        opts.on("-f", "--format=FORMAT", "Output format (plain, json)") do |f|
+        opts.on("-f", "--format=FORMAT", "Output format (plain, json, definition)") do |f|
           format = f.downcase.to_sym
           unless UrbanDictionary::Formatter.registered.include?(format)
             raise OptionParser::InvalidOption, "#{f} is not a valid format"
