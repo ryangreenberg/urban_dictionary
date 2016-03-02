@@ -45,7 +45,7 @@ Specify the output format with `--format`. The default is `plain`; `json` is als
       "entries": [
         {
           "definition": "keepin it real to the fullest and super tight.",
-          "example": "end of the convo\rLuke: aight man, peace\rQ: kool homie, keep it one hundred (100)"
+          "example": "end of the convo\nLuke: aight man, peace\nQ: kool homie, keep it one hundred (100)"
         },
         ...
     }

@@ -15,19 +15,12 @@ describe UrbanDictionary::CLI do
   def mk_cli(str, dictionary = nil)
     config = CLI::Config.new(
       :args => str.to_argv,
-      :stdout => Test::IO.new,
-      :stderr => Test::IO.new,
+      :stdout => TestHelpers::IO.new,
+      :stderr => TestHelpers::IO.new,
     )
     config.update(:dictionary, dictionary) unless dictionary.nil?
     cli = CLI.new(config)
     [cli, config]
-  end
-
-  def mk_word(term, definitions, examples)
-    UrbanDictionary::Word.new(
-      term,
-      Array(definitions).zip(Array(examples)).map {|ea| UrbanDictionary::Entry.new(*ea) }
-    )
   end
 
   describe "#run" do

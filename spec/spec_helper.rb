@@ -5,22 +5,23 @@ require 'shellwords'
 require 'stringio'
 require 'webmock/rspec'
 
-RSpec.configure do |config|
-  config.run_all_when_everything_filtered = true
-  config.filter_run :focus
-  config.order = 'random'
-end
-
-module Test
-  def self.load_fixture(name)
-    File.read(File.expand_path("../html/#{name}", __FILE__))
-  end
-
+module TestHelpers
   class IO < StringIO
     def content
       rewind
       read
     end
+  end
+
+  def load_fixture(name)
+    File.read(File.expand_path("../html/#{name}", __FILE__))
+  end
+
+  def mk_word(term, definitions, examples)
+    UrbanDictionary::Word.new(
+      term,
+      Array(definitions).zip(Array(examples)).map {|ea| UrbanDictionary::Entry.new(*ea) }
+    )
   end
 end
 
@@ -31,3 +32,9 @@ class String
   end
 end
 
+RSpec.configure do |config|
+  config.run_all_when_everything_filtered = true
+  config.filter_run :focus
+  config.order = 'random'
+  config.include TestHelpers
+end

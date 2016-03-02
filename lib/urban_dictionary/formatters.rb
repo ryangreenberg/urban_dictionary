@@ -2,6 +2,15 @@ require 'multi_json'
 
 module UrbanDictionary
   class Formatter
+    class Util
+      PATTERN = Regexp.compile(/\r\n|\r|\n/)
+      NEW_LINE = "\n"
+
+      def self.convert_linebreaks(str)
+        str.gsub(PATTERN, NEW_LINE)
+      end
+    end
+
     def self.register(name, klass)
       @formatters ||= {}
       if @formatters.include?(name)
@@ -31,9 +40,9 @@ module UrbanDictionary
       output << '-' * word.size
       output << ''
       word.entries.each_with_index do |entry, i|
-        output << "#{i + 1}. #{entry.definition}"
+        output << "#{i + 1}. #{Util.convert_linebreaks(entry.definition)}"
         output << ""
-        output << "Example: #{entry.example}"
+        output << "Example: #{Util.convert_linebreaks(entry.example)}"
         output << ""
         output << ""
       end
@@ -47,8 +56,8 @@ module UrbanDictionary
         :word => word.word,
         :entries => word.entries.map do |entry|
           {
-            :definition => entry.definition,
-            :example => entry.example
+            :definition => Util.convert_linebreaks(entry.definition),
+            :example => Util.convert_linebreaks(entry.example)
           }
         end
       }
